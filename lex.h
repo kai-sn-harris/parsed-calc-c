@@ -58,6 +58,7 @@ TokArray lex(const char *input) {
             i = j-1;
             Token num;
             num.value = atoi(raw);
+            free(raw);
             num.type = NUM;
             arrayAdd(&toks, num);
             continue;
