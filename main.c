@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[]) {
     if(argc == 1) {
-        printf("Error: must supply equation to be solved");
+        printf("Error: must supply equation to be solved\n");
         exit(EXIT_FAILURE);
     }
 
