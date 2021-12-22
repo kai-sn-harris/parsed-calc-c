@@ -46,7 +46,7 @@ TokArray lex(const char *input) {
     initArray(&toks);
     for(int i = 0; i < strlen(input); i++) {
         // is a number
-        if(input[i] <= 57 && input[i] >= 49) {
+        if(input[i] <= 57 && input[i] >= 48) {
             char* raw = (char*)malloc(10*sizeof(char));
             raw[0] = '\0';
             int j = i;
