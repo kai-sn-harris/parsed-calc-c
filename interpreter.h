@@ -14,6 +14,7 @@ float visit(Node node) {
         return visit(*node.node.binop.left) * visit(*node.node.binop.right);
     if(node.node.binop.op == '/')
         return visit(*node.node.binop.left) / visit(*node.node.binop.right);
+    return -1.0f;
 }
 
 float calc(const char* input) {
