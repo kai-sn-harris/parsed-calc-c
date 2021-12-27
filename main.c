@@ -17,8 +17,10 @@ int main(int argc, char *argv[]) {
     for(int i = 1; i < argc; i++)
         strcat(input, argv[i]);
     input[strsize] = '\0';
-    
+
+    // char* input = "(2+2*(1+2))*2";
     printf("%s = %.6f\n", input, calc(input));
     freeArray(&toks);
     free(input);
 }
+

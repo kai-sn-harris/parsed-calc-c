@@ -13,6 +13,18 @@ Token getNextToken() {
     return curTok;
 }
 
+void eat(tokType type) {
+    if(curTok.type == type)
+        curTok = getNextToken();
+    else {
+        printf("Expected type %d but got type %d\n", type, curTok.type);
+        exit(EXIT_FAILURE);
+    }
+}
+
+// prototype so it can be used before definition
+Node AddSubTerm();
+
 Node factor() {
     if(curTok.type == NUM) {
         Node num;
@@ -20,6 +32,11 @@ Node factor() {
         num.node.num.value = curTok.value;
         curTok = getNextToken();
         return num;
+    } else if(curTok.type == LPAREN) {
+        eat(LPAREN);
+        Node node = AddSubTerm();
+        eat(RPAREN);          
+        return node;
     } else {
         printf("expected num but u did some dumbass shit lmao %d\n", curTok.type);
         exit(EXIT_FAILURE);
@@ -59,7 +76,7 @@ Node AddSubTerm() {
         binop.type = N_BINOP;
         binop.node.binop.op = curTok.type == ADD ? '+' : '-';
         curTok = getNextToken();
-        
+
         Node *left = NULL;
         left = (Node*)malloc(sizeof(Node));
         *left = mulDiv;

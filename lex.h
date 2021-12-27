@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-enum tokType { NUM, ADD, SUB, MUL, DIV, END };
+enum tokType { NUM, ADD, SUB, MUL, DIV, LPAREN, RPAREN, END };
 typedef enum tokType tokType;
 
 struct Token {
@@ -50,7 +50,7 @@ TokArray lex(const char *input) {
             char* raw = (char*)malloc(10*sizeof(char));
             raw[0] = '\0';
             int j = i;
-            while(input[j] <= 57 && input[j] >= 49) {
+            while(input[j] <= 57 && input[j] >= 48) {
                 strncat(raw, &input[j], 1);
                 j++;
             }
@@ -69,6 +69,8 @@ TokArray lex(const char *input) {
         if(input[i] == '-') op.type = SUB;
         if(input[i] == '*') op.type = MUL;
         if(input[i] == '/') op.type = DIV;
+        if(input[i] == '(') op.type = LPAREN;
+	    if(input[i] == ')') op.type = RPAREN;
         arrayAdd(&toks, op);
     }
     return toks;
